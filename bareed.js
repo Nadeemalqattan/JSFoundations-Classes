@@ -15,13 +15,13 @@ class Point {
     this.y = y;
   }
 
-  distanceTo = point => {
+  distanceTo = (point) => {
     let xDelta = this.x - point.x;
     let yDelta = this.y - point.y;
     return Math.sqrt(xDelta * xDelta + yDelta * yDelta); // PYTHAGORAS!
   };
 
-  equals = point => point.x === this.x && point.y === this.y;
+  equals = (point) => point.x === this.x && point.y === this.y;
 
   static randomPoint = (maxX, maxY) => {
     let x = Math.random() * (maxX || 100);
@@ -43,13 +43,19 @@ class Point {
  **********************************************************/
 class Wallet {
   // implement Wallet!
-  constructor(money = 0) {}
+  constructor(money = 0) {
+    this.money = money;
+  }
 
-  credit = amount => {};
+  credit = (amount) => {
+    this.money = this.money + amount;
+  };
 
-  debit = amount => {};
+  debit = (amount) => {
+    this.money = this.money - amount;
+  };
 }
-
+let wallet = new Wallet();
 /**********************************************************
  * Person: defines a person with a name (and feelings)
  *
@@ -62,9 +68,15 @@ class Wallet {
  * let person = new Person(name, x, y);
  **********************************************************/
 class Person {
-  // implement Person!
+  constructor(name, x, y) {
+    this.name = name;
+    this.location = new Point(x, y);
+    this.wallet = new Wallet();
+  }
+  moveTo = (point) => {
+    this.location = point;
+  };
 }
-
 /**********************************************************
  * Vendor: defines a vendor
  * Subclasses Person
@@ -80,8 +92,13 @@ class Person {
  *
  * new vendor = new Vendor(name, x, y);
  **********************************************************/
-class Vendor {
-  // implement Vendor!
+class Vendor extends Person {
+  constructor(name, x, y) {
+    super(name, x, y);
+    this.range = 5;
+    this.price = 1;
+  }
+  sellTo = (customer, numberOfIceCreams) => {};
 }
 
 /**********************************************************
