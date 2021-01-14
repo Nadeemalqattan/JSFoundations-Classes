@@ -48,14 +48,14 @@ class Wallet {
   }
 
   credit = (amount) => {
-    this.money = this.money + amount;
+    this.money += amount;
   };
 
   debit = (amount) => {
-    this.money = this.money - amount;
+    this.money -= amount;
   };
 }
-let wallet = new Wallet();
+
 /**********************************************************
  * Person: defines a person with a name (and feelings)
  *
@@ -99,8 +99,8 @@ class Vendor extends Person {
   sellTo = (customer, numberOfIceCreams) => {
     this.moveTo(customer.location);
     const cost = this.price * numberOfIceCreams;
-    customer.Wallet.debit(cost);
-    this.Wallet.credit(cost);
+    customer.wallet.debit(cost);
+    this.wallet.credit(cost);
   };
 }
 /**********************************************************
